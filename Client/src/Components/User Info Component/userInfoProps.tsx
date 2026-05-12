@@ -29,4 +29,10 @@ export const steps=[
 export const ht=[{id:1,type:"number",placeholder:"5'5 ft"},{id:2,type:"number",placeholder:"140 cm"}]
 export const wt=[{id:1,type:"number",placeholder:"60 kg"},{id:2,type:"number",placeholder:"60 lbs"}]
 export const age=[{id:1,type:"text",placeholder:"Your Age"}]
+export const goal = [
+  { id: 1, type: "radio", span: "I want to lose fat and look leaner", name: "goal" },
+  { id: 2, type: "radio", span: "I want to build a stronger, muscular body", name: "goal" },
+  { id: 3, type: "radio", span: "I want more energy and better stamina", name: "goal" },
+  { id: 4, type: "radio", span: "I just want to stay consistent and healthy", name: "goal" },
+]
     

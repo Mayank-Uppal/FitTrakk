@@ -15,6 +15,7 @@ const otpInput= [
     {id:5,type:"text",placeholder:"0"},
     {id:6,type:"text",placeholder:"0"},
 ]
+
 export default function Auth() {
     const navigate=useNavigate();
     const [auth,setauth]=useState<Boolean>(false);
