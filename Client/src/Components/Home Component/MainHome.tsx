@@ -1,10 +1,12 @@
+import { useNavigate } from "react-router"
 import Button from "../Button Component/Button"
 import Header from "../Heading Component/Header"
 import Navbar from "../Navbar Component/Navbar"
 
 export default function MainHome() {
+    const navigate=useNavigate();
 
-    const button=[{id:1,text:"Add your first log",reverse:false}]
+    const button=[{id:1,text:"Add your first log",reverse:false,handleClick:()=>navigate('/log')}]
   return (
     <>
     <div className="flex flex-col bg-zinc-950 items-center text-center h-screen">

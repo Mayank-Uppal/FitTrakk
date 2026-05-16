@@ -1,29 +1,43 @@
-import { useNavigate } from "react-router";
-import Button from "../Button Component/Button";
+import { data, useNavigate } from "react-router";
 import Header from "../Heading Component/Header";
 import NormalHome from "../Home Component/NormalHome";
 import Input from "../Input Component/Input";
 import Navbar from "../Navbar Component/Navbar";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { emailSchema, otpSchema, type emailForm, type otpForm } from "../Schemas/schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-const input = [{ id: 1, type: "email", placeholder: "johnDoe@gmail.com" }]
+const input = [{ id: 1, type: "email", placeholder: "johnDoe@gmail.com",name:"email"}]
 const otpInput= [
-    {id:1,type:"text",placeholder:"0"},
-    {id:2,type:"text",placeholder:"0"},
-    {id:3,type:"text",placeholder:"0"},
-    {id:4,type:"text",placeholder:"0"},
-    {id:5,type:"text",placeholder:"0"},
-    {id:6,type:"text",placeholder:"0"},
+    {id:1,type:"text",placeholder:"0",name:"otp"},
+    {id:2,type:"text",placeholder:"0",name:"otp"},
+    {id:3,type:"text",placeholder:"0",name:"otp"},
+    {id:4,type:"text",placeholder:"0",name:"otp"},
+    {id:5,type:"text",placeholder:"0",name:"otp"},
+    {id:6,type:"text",placeholder:"0",name:"otp"},
 ]
 
 export default function Auth() {
     const navigate=useNavigate();
     const [auth,setauth]=useState<Boolean>(false);
     const [otp,setotp]=useState<Boolean>(false);
+    const emailForm=useForm<emailForm>({resolver:zodResolver(emailSchema)})
+    const otpForm=useForm<otpForm>({resolver:zodResolver(otpSchema)})
 
     const homebuttons=[{ id: 1, text: "Get Started", reverse: false ,handleClick:()=>setauth(true)}]
-    const authbuttons = [{ id: 1, text: "Get OTP", reverse: false,handleClick:()=>{setauth(false);setotp(true)} }, { id: 2, text: "Sign up with Google", reverse: true }]
+    const authbuttons = [{ id: 1, text: "Get OTP", reverse: false}, { id: 2, text: "Sign up with Google", reverse: true }]
     const otpbuttons=[{id:1,text:"Login",reverse:false,handleClick:()=>navigate('/onboarding')}]
+    
+    const handleEmail=(data:any)=>{
+        console.log(data);
+        setauth(false)
+        setotp(true)
+    }
+    const handleotp=(data:any)=>{
+        console.log(data);
+    }
+
     return (
         <>
         <div className="flex flex-col bg-zinc-950 overflow-hidden h-screen">
@@ -38,11 +52,17 @@ export default function Auth() {
                     subHeadingWidth="max-w-4xl"
                     />
                     <div className="w-full max-w-xl">
-                        <Input key="email" input={input} />
+                        <Input key="email" input={input} 
+                        register={emailForm.register} 
+                        errors={emailForm.formState.errors}  
+                        handleSubmit={emailForm.handleSubmit}
+                        onsubmit={handleEmail}
+                        buttons={authbuttons}
+                        />
                     </div>
-                    <div className="w-full max-w-xl mt-2 flex flex-col gap-4">
+                   {/*  <div className="w-full max-w-xl mt-2 flex flex-col gap-4">
                         <Button buttons={authbuttons} />
-                    </div>
+                    </div> */}
                     </>
                 ) : 
                 otp ?(
@@ -54,11 +74,17 @@ export default function Auth() {
                     headingWidth="max-w-6xl text-white"
                     />
                     <div className="w-full max-w-xl text-center">
-                        <Input key="otp" input={otpInput} />
+                        <Input key="otp" input={otpInput} 
+                        register={otpForm.register} 
+                        errors={otpForm.formState.errors}
+                        handleSubmit={otpForm.handleSubmit}
+                        onsubmit={handleotp}
+                        buttons={otpbuttons}
+                        />
                     </div>
-                    <div className="w-full max-w-xl mt-2 flex flex-col gap-4">
+                    {/* <div className="w-full max-w-xl mt-2 flex flex-col gap-4">
                         <Button buttons={otpbuttons} />
-                    </div>
+                    </div> */}
                     </>
                 ):
                 (

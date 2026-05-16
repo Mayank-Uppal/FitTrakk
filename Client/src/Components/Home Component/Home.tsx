@@ -4,10 +4,10 @@ import MainHome from "./MainHome";
 export default function Home() {
   return (
     <div className="flex flex-row w-full">
-      <div className="w-1/6">
+      {/* <div className="w-1/6">
         <Sidebar/>
-      </div>
-      <div className="w-5/6">
+      </div> */}
+      <div className="w-full">
         <MainHome/>
       </div>      
     </div>
