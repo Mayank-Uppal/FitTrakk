@@ -1,4 +1,7 @@
 import sendOTP from "../Config/mail.js"
+import jwt from "jsonwebtoken";
+import { userModel } from "../Model/user.js";
+
 let OTP;
 export const userLogin=async({email})=>{
     try {
@@ -9,10 +12,14 @@ export const userLogin=async({email})=>{
     }
 }
 
-export const userOtp=async({otp})=>{
+export const userOtp=async({email,otp})=>{
     try {
         if(otp === OTP){
-            return {message:"OTP validated successfully",status:200}
+            const newUser=new userModel({email:email});
+            await newUser.save();
+            const accessToken=jwt.sign({userEmail:newUser.email},process.env.secretKey,{expiresIn:"1h"})
+            const refreshToken=jwt.sign({userEmail:newUser.email},process.env.secretKey,{expiresIn:"7d"})
+            return {message:"OTP validated successfully",accessToken:accessToken,refreshToken:refreshToken,status:200}
         }
         else{
             throw new Error('OTP not valid') ;
