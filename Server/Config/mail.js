@@ -7,6 +7,7 @@ const client=new BrevoClient({
 })
 
 export const sendOTP=async(mail)=>{
+    console.log(mail);
     const Otp=Math.floor(400000 + Math.random()*1000).toString();
     try {
         const result=await client.transactionalEmails.sendTransacEmail({
@@ -21,7 +22,7 @@ export const sendOTP=async(mail)=>{
 
             Regards,
             Team Mayank`,
-            sender:{name:"Mayank",email:"rentiqapp@gmail.com"},
+            sender:{name:"Mayank",email:"myank07official@gmail.com"},
             to:[{email:mail}]
         }) 
         return Otp;

@@ -29,14 +29,14 @@ export default function Input({input,register,errors,handleSubmit,onsubmit,butto
           return;
       }
       if(input.length==1)return;
-      if(input[index].name!="otp")return;
+       if(!input[index].name.includes("otp"))return;
       else if(input.length>1 && e.target.value){
         if(index!=input.length)document.getElementById(`otp-${index+1}`)?.focus();
       }
   }
   const handleKey=(e:React.KeyboardEvent<HTMLInputElement>,index:number)=>{
       if(input.length==1)return;
-      if(input[index].name!="otp")return;
+      if(!input[index].name.includes("otp"))return;
       else if(input.length>1){
         if(e.key==="Backspace" && !e.currentTarget.value){
           const prev=document.getElementById(`otp-${index-1}`)
@@ -49,7 +49,7 @@ export default function Input({input,register,errors,handleSubmit,onsubmit,butto
       {input.map((i,index)=>(
         <>
         <div key={index} className={`flex flex-col w-full ${i.span?'border border-white/50 rounded-md p-4':""} `}>
-          <input key={i.name} {...register(i.name as string)} checked={selected===i.span} value={i.span} id={`otp-${index}`} onKeyDown={i.name==='otp'?((e:React.KeyboardEvent<HTMLInputElement>)=>handleKey(e,index)):undefined} onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleChange(e,index)} name={i.name} className={`text-center py-4 font-body text-white rounded-md border border-gray-400/50 ${i.span?'':'w-full'}`} type={i.type} placeholder={i.placeholder}  />
+          <input key={i.name} {...register(i.name as string)} checked={selected===i.span} id={`otp-${index}`} onKeyDown={i.name==='otp'?((e:React.KeyboardEvent<HTMLInputElement>)=>handleKey(e,index)):undefined} onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleChange(e,index)} name={i.name} className={`text-center py-4 font-body text-white rounded-md border border-gray-400/50 ${i.span?'':'w-full'}`} type={i.type} placeholder={i.placeholder}  />
           {i.span && <span className='text-xl font-body w-full text-white'>{i.span}</span>}
           {errors[i.name] && (
             <span className="text-red-400 text-sm mt-1">

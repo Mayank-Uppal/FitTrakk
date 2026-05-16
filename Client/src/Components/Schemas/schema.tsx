@@ -18,8 +18,27 @@ export const emailSchema=z.object({
     email:z.string().email('Enter valid Email Addrress')
 })
 
+export const heightSchema=z.object({
+    height:z.string().min(50,'Height should be greater than 30')
+})
+export const weightSchema=z.object({
+    weight:z.string().min(10,'Weight should be greater than 10')
+})
+export const ageSchema=z.object({
+    age:z.string().min(16,'age should be greater than 16')
+})
+
+export const goalSchema=z.object({
+    goal:z.string().min(1,"required")
+})
+
 export const otpSchema=z.object({
-    otp:z.string().min(1,"enter valid otp").max(1,"max 1 input is allowed")
+    otp1:z.string().length(1,"Required"),
+    otp2:z.string().length(1,"Required"),
+    otp3:z.string().length(1,"Required"),
+    otp4:z.string().length(1,"Required"),
+    otp5:z.string().length(1,"Required"),
+    otp6:z.string().length(1,"Required"),
 })
 
 export type MealForm=z.infer<typeof mealSchema>
@@ -27,3 +46,7 @@ export type StepForm=z.infer<typeof stepsSchema>
 export type GymForm=z.infer<typeof gymSchema>
 export type emailForm=z.infer<typeof emailSchema>
 export type otpForm=z.infer<typeof otpSchema>
+export type heightForm=z.infer<typeof heightSchema>
+export type weightForm=z.infer<typeof weightSchema>
+export type ageForm=z.infer<typeof ageSchema>
+export type goalForm=z.infer<typeof goalSchema>

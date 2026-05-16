@@ -13,6 +13,8 @@ export const userLogin=async({email})=>{
 }
 
 export const userOtp=async({email,otp})=>{
+    console.log(email,otp)
+    console.log(OTP)
     try {
         if(otp === OTP){
             const newUser=new userModel({email:email});
