@@ -3,13 +3,15 @@ import Header from "../Heading Component/Header";
 import NormalHome from "../Home Component/NormalHome";
 import Input from "../Input Component/Input";
 import Navbar from "../Navbar Component/Navbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { emailSchema, otpSchema, type emailForm, type otpForm } from "../Schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { otpInput,input } from "./props";
 import { useQuery,useMutation } from "@tanstack/react-query";
 import axios from 'axios';
+import Redirecting from "../Redirecting Component/Redirecting";
+import { getCookie } from "../Protected Component/Protected";
 
 export default function Auth() {
     const navigate=useNavigate();
@@ -19,6 +21,19 @@ export default function Auth() {
     const otpForm=useForm<otpForm>({resolver:zodResolver(otpSchema)})
     const [email,setEmail]=useState<string>("");
     const homebuttons=[{ id: 1, text: "Get Started", reverse: false ,handleClick:()=>setauth(true)}]
+    const [redirect,setRedirect]=useState<Boolean>(false);
+
+    useEffect(()=>{
+        const islogin=async()=>{
+            const accessToken = getCookie('accessToken') ;
+            const refeshToken = getCookie('refreshToken');
+        
+            if(accessToken || refeshToken){
+                navigate("/home");
+            }
+        }
+        islogin();
+    },[])
 
     const {mutate:emailMutate,isPending:emailPending}=useMutation({
         mutationFn:async(data:emailForm)=>{
@@ -40,9 +55,15 @@ export default function Auth() {
         mutationFn:async(data:any)=>{
             const otp=`${data.otp1}${data.otp2}${data.otp3}${data.otp4}${data.otp5}${data.otp6}`
             const res=await axios.post("http://localhost:5001/auth/otp-validate",{email:email,otp:otp});
+            return res.data;
         },
-        onSuccess:()=>{
-            navigate("/onboarding")
+        onSuccess:(data)=>{
+            document.cookie=`accessToken=${data.accessToken}`
+            document.cookie=`refreshToken=${data.refreshToken}`
+            setRedirect(true);
+            setTimeout(() => {
+                navigate("/onboarding")
+            }, 3000);
         },
         onError:(error)=>{
             console.log("error",error);
@@ -51,6 +72,7 @@ export default function Auth() {
     const otpbuttons=[{id:1,text: otpPending ? "Validating OTP...":"Login",reverse:false}]
     return (
         <>
+        {redirect && <Redirecting/>}
         <div className="flex flex-col bg-zinc-950 overflow-hidden h-screen">
             <Navbar />
             <div className="h-screen flex flex-col items-center justify-center text-center gap-3 ">

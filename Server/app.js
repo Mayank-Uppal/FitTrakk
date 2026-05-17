@@ -9,9 +9,12 @@ const app=express();
 app.use(cors());
 app.use(express.json());
 connectDB();
-
+app.use((req, res, next) => {
+  console.log(req.method, req.path)  // ✅ logs every request
+  next()
+})
 app.use('/log',logRoute);
-app.use('/info',infoRoute);
+app.use('/',infoRoute);
 app.use('/auth',authRoute);
 
 

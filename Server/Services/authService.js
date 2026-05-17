@@ -13,19 +13,17 @@ export const userLogin=async({email})=>{
 }
 
 export const userOtp=async({email,otp})=>{
-    console.log(email,otp)
-    console.log(OTP)
     try {
         if(otp === OTP){
-            const newUser=new userModel({email:email});
-            await newUser.save();
-            const accessToken=jwt.sign({userEmail:newUser.email},process.env.secretKey,{expiresIn:"1h"})
+            const isuser=await userModel.findOne({email:email});
+            if(!isuser){
+                const newUser=new userModel({email:email});
+                await newUser.save();
+            }
+            const accessToken=jwt.sign({userEmail:newUser.email },process.env.secretKey,{expiresIn:"1h"})
             const refreshToken=jwt.sign({userEmail:newUser.email},process.env.secretKey,{expiresIn:"7d"})
             return {message:"OTP validated successfully",accessToken:accessToken,refreshToken:refreshToken,status:200}
         }
-        else{
-            throw new Error('OTP not valid') ;
-        } 
     } catch (error) {
         throw new Error('Error in authenticating User from OTP ');
     }

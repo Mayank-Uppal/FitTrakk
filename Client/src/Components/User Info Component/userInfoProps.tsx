@@ -1,25 +1,25 @@
 export const steps = [
     {
-        heading: "What's your height ?",
-        subHeading: "We use this to personalize your daily calorie goals and fitness recommendations.",
+        heading: "How tall are you? ↕️",
+        subHeading: "Your height is the foundation of everything — we use it alongside your weight and age to calculate your BMR, estimate your daily calorie burn, and set targets that are actually built for your body, not just an average.",
+        headingWidth: "max-w-6xl text-white",
+        subHeadingWidth: "max-w-5xl"
+    },
+    {
+        heading: "Where are you starting from? 🏁",
+        subHeading: "Your current weight is your starting point — not a judgement, just a number. We use it to calculate how many calories your body burns at rest and build a plan that moves you closer to your goal every single day.",
         headingWidth: "max-w-6xl text-white",
         subHeadingWidth: "max-w-4xl"
     },
     {
-        heading: "Where are you starting from ?",
-        subHeading: "Knowing your weight lets us measure your progress and celebrate every milestone with you.",
+        heading: "How old are you? 🎂",
+        subHeading: "Age affects your metabolism, recovery speed, and how your body responds to training. A 20-year-old and a 35-year-old with identical stats need very different targets — your age makes sure your plan is built for you specifically.",
         headingWidth: "max-w-6xl text-white",
         subHeadingWidth: "max-w-4xl"
     },
     {
-        heading: "How old are you ?",
-        subHeading: "Age plays a big role in metabolism — this helps us fine-tune your nutrition and fitness plan.",
-        headingWidth: "max-w-6xl text-white",
-        subHeadingWidth: "max-w-4xl"
-    },
-    {
-        heading: "How old are you ?",
-        subHeading: "Age plays a big role in metabolism — this helps us fine-tune your nutrition and fitness plan.",
+        heading: "What's your main goal? 🎯",
+        subHeading: "This is the most important question we'll ask. Your goal determines everything — your daily calorie target, macro split, step count, and net calorie balance are all calculated differently based on what you're trying to achieve.",
         headingWidth: "max-w-6xl text-white",
         subHeadingWidth: "max-w-4xl"
     },
@@ -28,12 +28,10 @@ export const steps = [
 
 export const allInputs = [
     [
-        { id: 1, type: "number", placeholder: "5'5 ft",name:"height1" }, 
-        { id: 2, type: "number", placeholder: "140 cm",name:"height2" }
+        { id: 1, type: "number", placeholder: "Enter your height  (cm)",name:"height" }
     ],
     [
-        { id: 1, type: "number", placeholder: "60 kg",name:"weight1" }, 
-        { id: 2, type: "number", placeholder: "60 lbs",name:"weight2" }
+        { id: 1, type: "number", placeholder: "Enter your weight (e.g 60 kg)",name:"weight" },
     ],
     [
         { id: 1, type: "text", placeholder: "Your Age",name:"age" }

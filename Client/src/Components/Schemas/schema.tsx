@@ -19,13 +19,13 @@ export const emailSchema=z.object({
 })
 
 export const heightSchema=z.object({
-    height:z.string().min(50,'Height should be greater than 30')
+    height:z.coerce.number().min(30,'Height should be greater than 30 cm').max(250,'Height should be less than 250 cm')
 })
 export const weightSchema=z.object({
-    weight:z.string().min(10,'Weight should be greater than 10')
+    weight:z.coerce.number().min(30,'Weight should be greater than 30 kg')
 })
 export const ageSchema=z.object({
-    age:z.string().min(16,'age should be greater than 16')
+    age:z.coerce.number().min(16,'age should be greater than 16')
 })
 
 export const goalSchema=z.object({

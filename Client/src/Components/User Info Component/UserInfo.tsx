@@ -3,24 +3,21 @@ import Header from "../Heading Component/Header"
 import { useState } from "react"
 import Input from "../Input Component/Input";
 import { allInputs,steps} from "./userInfoProps";
-import { resolvePath, useNavigate } from "react-router";
+import { data, resolvePath, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import {type ageForm, ageSchema, goalSchema, heightSchema, type weightForm, weightSchema, type goalForm, type heightForm } from "../Schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-
+import axios from 'axios'
+import RedirectingAI from "../Redirecting Component/RedirectingAI";
+import { getCookie } from "../Protected Component/Protected";
 
 export default function UserInfo() {
     const navigate=useNavigate();
     const [heightOp,setHeightOp]=useState<boolean>(true);
     const [weightOp,setWeightOp]=useState<boolean>(true);
-    const [data,setData]=useState<any>({});
+    const [userData,setUserData]=useState<any>({});
     const [step,setstep]=useState<number>(0);
-    const hbtn = [{
-        id: 1,
-        text: step === 3 ? "Submit" : "Next",
-        reverse: false,
-    }]
     
     const handlebtn=()=>{
         if(step==0)setHeightOp(prev=>!prev)
@@ -32,17 +29,56 @@ export default function UserInfo() {
     const ageForm=useForm<ageForm>({resolver:zodResolver(ageSchema)})
     const goalForm=useForm<goalForm>({resolver:zodResolver(goalSchema)});
 
-    console.log("clkc");
+    const accessToken = getCookie('accessToken') 
 
     const {mutate:heightMutate,isPending:heightPending}=useMutation({
-        mutationFn:async(data:any)=>console.log("click")
+        mutationFn:async(data:any)=>{
+            setUserData((prev:any)=>({...prev,height:data.height}))
+            setstep(prev=>prev+1);
+        }
     })
+    const {mutate:weightMutate,isPending:weightPending}=useMutation({
+        mutationFn:async(data:any)=>{
+            setUserData((prev:any)=>({...prev,weight:data.weight}))
+            setstep(prev=>prev+1);
+        }
+    })
+    const {mutate:ageMutate,isPending:agePending}=useMutation({
+        mutationFn:async(data:any)=>{
+            setUserData((prev:any)=>({...prev,age:data.age}))
+            setstep(prev=>prev+1);
+        }
+    })
+    const {mutate:goalMutate,isPending:goalPending}=useMutation({
+        mutationFn:async(data:any)=>{
+            const res = await axios.post('http://localhost:5001/objectives', 
+            { ...userData, goal: data.goal },  
+            { headers: { Authorization: `Bearer ${accessToken}` } }  
+            )
+        },
+        onSuccess:()=>{
+            navigate('/home');
+        },
+        onError:(error:any)=>
+        {
+            console.log(error)
+        }
+    })
+
+    const hbtn = [{
+        id: 1,
+        text: step === 3 ?goalPending?"Analyzing Goals and Preparing Data....":"Submit" : "Next",
+        reverse: false,
+    }]
   return (
+    <>
+    {goalPending && <RedirectingAI/>}
     <div className="flex flex-col bg-zinc-950 overflow-hidden h-screen">
         <Navbar />
         <div className="h-screen flex flex-col mt-20 items-center text-center gap-3 ">
+
             <div className="my-10">
-             <strong className="text-lime-400 text-2xl font-body text-center ">Step - {step+1}</strong>
+                <p className="text-white/40 text-md">Step - {step+1} of 4</p>
             </div>
 
             <Header
@@ -51,15 +87,9 @@ export default function UserInfo() {
                 headingWidth={steps[step].headingWidth}
                 subHeadingWidth={steps[step].subHeadingWidth}
             />
-
-            {step<3 && <div className="flex flex-row gap-2  bg-lime-500 p-2 rounded-md mt-7">
-                <button onClick={handlebtn} className={`cursor-pointer px-10 rounded-md py-2 ${active?"text-white bg-black":"text-black bg-none"} duration-200`}>{step===0?"ft":"kg"}</button>
-                <button className="text-black px-4">|</button>
-                <button onClick={handlebtn} className={`cursor-pointer px-10 py-2 duration-200 ease-in ${active?"text-black bg-none":"text-white bg-black rounded-md"}`}>{step===0?"cm":"lbs"}</button>
-            </div> }
             
-            <div className="flex flex-col gap-4 w-full max-w-xl">
-            <Input 
+            <div className="flex flex-col gap-4 w-full max-w-xl mt-12">
+            <Input  
             input={
                 step===0 && active ? [allInputs[0][0]] :
                 step===0 && !active ? [allInputs[0][1]] :
@@ -87,12 +117,12 @@ export default function UserInfo() {
                 step==2?ageForm.handleSubmit:
                 step==3?goalForm.handleSubmit:
                 undefined}
-            onsubmit={step==0?heightMutate:undefined }
+            onsubmit={step==0?heightMutate:step==1?weightMutate:step==2?ageMutate:step==3?goalMutate:undefined}
             buttons={hbtn}
             />
             </div>
-
         </div>     
-    </div>        
+    </div>      
+    </>  
   )
 }
