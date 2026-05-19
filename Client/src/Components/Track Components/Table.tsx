@@ -1,6 +1,6 @@
 import { mealType } from "./Props"
 
-interface prop{
+export interface prop{
     meal?:string,
     time?:string,
     qty?:string,

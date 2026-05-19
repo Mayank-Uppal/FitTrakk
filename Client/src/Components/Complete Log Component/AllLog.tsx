@@ -4,7 +4,6 @@ import axios from 'axios'
 import { getCookie } from '../Protected Component/Protected'
 import { useNavigate,useSearchParams } from 'react-router'
 import Button from '../Button Component/Button'
-
 import { icons } from '../Track Components/Props'
 import Table from '../Track Components/Table'
 import NewCard from './newCard'
@@ -14,7 +13,7 @@ export default function AllLog() {
     const [dateParam]=useSearchParams();
     const date=dateParam.get("date");
     const [logData,setLogDate]=useState<any>({});
-    const [mealData,setMealData]=useState<any[]>([]);
+    const [mealData,setMealData]=useState<any>([]);
 
     useQuery({
         queryKey:[],

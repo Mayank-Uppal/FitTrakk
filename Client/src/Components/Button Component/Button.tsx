@@ -1,5 +1,5 @@
 
-interface buttonProp{
+export interface buttonProp{
   id:number,
   text:string,
   reverse?:boolean

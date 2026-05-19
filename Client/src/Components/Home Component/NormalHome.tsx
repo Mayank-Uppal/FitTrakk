@@ -4,8 +4,9 @@ import { useEffect } from "react";
 import { getCookie } from "../Protected Component/Protected";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import type { buttonProp } from "../Button Component/Button";
 
-export default function NormalHome({homebuttons}) {
+export default function NormalHome({homebuttons}:{homebuttons:buttonProp[]}) {
   const navigate=useNavigate();
     useEffect(()=>{
             const islogin=async()=>{
