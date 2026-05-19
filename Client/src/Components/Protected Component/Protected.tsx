@@ -20,7 +20,7 @@ export default function Protected({children}:any) {
             }
             else if(!accessToken && refeshToken){
                 try {
-                    const res=await axios.post('http://localhost:5001/auth/refresh',{refeshToken:refeshToken},{ headers: { Authorization: `Bearer ${refeshToken}` } })
+                    const res=await axios.post('https://fittrakk.onrender.com/auth/refresh',{refeshToken:refeshToken},{ headers: { Authorization: `Bearer ${refeshToken}` } })
                     document.cookie = `accessToken=${res.data.accessToken}; path=/; SameSite=Lax; max-age=3600;`
                     console.log(res.data)
                     setstatus("authorized");

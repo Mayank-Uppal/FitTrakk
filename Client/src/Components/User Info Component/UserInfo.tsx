@@ -55,7 +55,7 @@ export default function UserInfo() {
     })
     const {mutate:goalMutate,isPending:goalPending}=useMutation({
         mutationFn:async(data:any)=>{
-            await axios.post('http://localhost:5001/objectives', 
+            await axios.post('https://fittrakk.onrender.com/objectives', 
             { ...userData, goal: data.goal },  
             { headers: { Authorization: `Bearer ${accessToken}` } }  
             )

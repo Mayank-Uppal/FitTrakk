@@ -18,7 +18,7 @@ export default function AllLog() {
     useQuery({
         queryKey:[],
         queryFn:async()=>{
-            const res=await axios.get(`http://localhost:5001/track?date=${date}`,{headers:{
+            const res=await axios.get(`https://fittrakk.onrender.com/track?date=${date}`,{headers:{
             Authorization:`Bearer ${getCookie("accessToken")}`
             }}) 
             setLogDate(res.data.data.logData);
