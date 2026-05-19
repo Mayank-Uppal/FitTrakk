@@ -16,7 +16,7 @@ export default function AllLog() {
     const [logData,setLogDate]=useState<any>({});
     const [mealData,setMealData]=useState<any[]>([]);
 
-    const {data}=useQuery({
+    useQuery({
         queryKey:[],
         queryFn:async()=>{
             const res=await axios.get(`http://localhost:5001/track?date=${date}`,{headers:{
@@ -36,9 +36,6 @@ export default function AllLog() {
     <div className='min-h-screen bg-slate-950'>
         <div className='flex flex-row justify-between items-center'>
             <p className='text-white/60 font-body text-2xl mx-10 py-10 '>Log Summary - {date}</p>
-            {/* <div className='max-w-xl mx-10 '>
-                <Button buttons={[{id:1,text:"Back to All logs",reverse:false,handleClick:()=>navigate(-1)}]}/>
-            </div> */}
         </div>
 
             <div className='grid grid-cols-3 gap-4 mx-10'>

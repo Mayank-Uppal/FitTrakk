@@ -12,7 +12,7 @@ export default function Log() {
     const handleClick=async(index:number)=>{
         navigate(`/alllogs/details?date=${logsData[index].dates}`)
     }
-    const {data}=useQuery({
+    useQuery({
         queryKey:[],
         queryFn:async()=>{
             const res=await axios.get("http://localhost:5001/track/all-logs",{headers:{

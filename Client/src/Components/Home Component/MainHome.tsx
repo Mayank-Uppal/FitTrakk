@@ -16,7 +16,7 @@ export default function MainHome() {
     console.log(actual)
 
 
-    const {data}=useQuery({
+    useQuery({
         queryKey:[],
         queryFn:async()=>{
             const accessToken=getCookie('accessToken');

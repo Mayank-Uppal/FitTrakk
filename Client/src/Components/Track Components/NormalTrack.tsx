@@ -3,7 +3,7 @@ import Meal from "./Meal";
 import Input from "../Input Component/Input";
 import Button from "../Button Component/Button";
 import Table from "./Table";
-import { formatted,allInputs,OptionButtons, mealType,icons} from "./Props";
+import { formatted,allInputs,OptionButtons,icons} from "./Props";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { mealSchema,stepsSchema,gymSchema } from "../Schemas/schema";
@@ -36,7 +36,7 @@ export default function NormalTrack() {
       setinputcount(index)
     }
   }
-  const {data}=useQuery({
+  useQuery({
     queryKey:[],
     queryFn:async()=>{
       const res=await axios.get(`http://localhost:5001/track?date=${new Date().toDateString()}`,{headers:{
@@ -52,7 +52,7 @@ export default function NormalTrack() {
   {icons:icons[2],title:"Net Calories",data:cardData?.netcalorie ?? 0},{icons:icons[3],title:"Protein Intake (in g)",data:cardData?.protein ?? 0},
   {icons:icons[4],title:"Gym Time (in mins)",data:cardData?.gym ?? 0}]
 
-const {mutate:mealMutate,isPending:mealPending,isError:mealError}=useMutation({
+const {mutate:mealMutate,isPending:mealPending}=useMutation({
   mutationFn:async(data:any)=>{
     const res=await axios.post('http://localhost:5001/track/meal',{qty:data.qty,meal:data.meal},{headers:{
       Authorization:`Bearer ${getCookie("accessToken")}`
@@ -66,7 +66,7 @@ const {mutate:mealMutate,isPending:mealPending,isError:mealError}=useMutation({
   }
 })
 
-const {mutate:stepMutate,isPending:stepPending,isError:stepError}=useMutation({
+const {mutate:stepMutate,isPending:stepPending}=useMutation({
   mutationFn:async(data:any)=>{
     const res=await axios.post('http://localhost:5001/track/steps',{steps:data.steps,calBurn:data.calBurn},{headers:{
       Authorization:`Bearer ${getCookie("accessToken")}`
@@ -79,7 +79,7 @@ const {mutate:stepMutate,isPending:stepPending,isError:stepError}=useMutation({
   }
 })
 
-const {mutate:gymMutate,isPending:gymPending,isError:gymError}=useMutation({
+const {mutate:gymMutate,isPending:gymPending}=useMutation({
   mutationFn:async(data:any)=>{
     const res=await axios.post('http://localhost:5001/track/gym',{time:data.time,calBurn:data.gymBurn},{headers:{
       Authorization:`Bearer ${getCookie("accessToken")}`

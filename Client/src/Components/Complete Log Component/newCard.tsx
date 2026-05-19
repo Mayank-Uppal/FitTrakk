@@ -3,9 +3,6 @@ interface newprops{
   title:any,
   data:any
 }
-interface newcardProp{
-  cardOptions:newprops[]
-}
 export default function NewCard({icons,title,data}:newprops) {
   return (
     <>

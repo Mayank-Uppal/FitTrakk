@@ -3,7 +3,7 @@ import Header from "../Heading Component/Header"
 import { useState } from "react"
 import Input from "../Input Component/Input";
 import { allInputs,steps} from "./userInfoProps";
-import { data, resolvePath, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import {type ageForm, ageSchema, goalSchema, heightSchema, type weightForm, weightSchema, type goalForm, type heightForm } from "../Schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,15 +15,15 @@ import { getCookie } from "../Protected Component/Protected";
 
 export default function UserInfo() {
     const navigate=useNavigate();
-    const [heightOp,setHeightOp]=useState<boolean>(true);
-    const [weightOp,setWeightOp]=useState<boolean>(true);
+    const heightOp=true;
+    const weightOp=true;
     const [userData,setUserData]=useState<any>({});
     const [step,setstep]=useState<number>(0);
     
-    const handlebtn=()=>{
+    /* const handlebtn=()=>{
         if(step==0)setHeightOp(prev=>!prev)
         if(step==1)setWeightOp(prev=>!prev)
-    }
+    } */
     const active=step===0?heightOp:weightOp;
     // @ts-ignore
     const heightForm=useForm<heightForm>({resolver:zodResolver(heightSchema)})
@@ -35,19 +35,19 @@ export default function UserInfo() {
 
     const accessToken = getCookie('accessToken') 
 
-    const {mutate:heightMutate,isPending:heightPending}=useMutation({
+    const {mutate:heightMutate}=useMutation({
         mutationFn:async(data:any)=>{
             setUserData((prev:any)=>({...prev,height:data.height}))
             setstep(prev=>prev+1);
         }
     })
-    const {mutate:weightMutate,isPending:weightPending}=useMutation({
+    const {mutate:weightMutate}=useMutation({
         mutationFn:async(data:any)=>{
             setUserData((prev:any)=>({...prev,weight:data.weight}))
             setstep(prev=>prev+1);
         }
     })
-    const {mutate:ageMutate,isPending:agePending}=useMutation({
+    const {mutate:ageMutate}=useMutation({
         mutationFn:async(data:any)=>{
             setUserData((prev:any)=>({...prev,age:data.age}))
             setstep(prev=>prev+1);
@@ -55,7 +55,7 @@ export default function UserInfo() {
     })
     const {mutate:goalMutate,isPending:goalPending}=useMutation({
         mutationFn:async(data:any)=>{
-            const res = await axios.post('http://localhost:5001/objectives', 
+            await axios.post('http://localhost:5001/objectives', 
             { ...userData, goal: data.goal },  
             { headers: { Authorization: `Bearer ${accessToken}` } }  
             )

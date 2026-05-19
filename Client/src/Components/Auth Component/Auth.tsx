@@ -1,4 +1,4 @@
-import { data, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import Header from "../Heading Component/Header";
 import NormalHome from "../Home Component/NormalHome";
 import Input from "../Input Component/Input";
@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { emailSchema, otpSchema, type emailForm, type otpForm } from "../Schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { otpInput,input } from "./props";
-import { useQuery,useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import axios from 'axios';
 import Redirecting from "../Redirecting Component/Redirecting";
 import { getCookie } from "../Protected Component/Protected";
@@ -37,7 +37,7 @@ export default function Auth() {
 
     const {mutate:emailMutate,isPending:emailPending}=useMutation({
         mutationFn:async(data:emailForm)=>{
-            const res=await axios.post('http://localhost:5001/auth/login',{email:data.email});
+            await axios.post('http://localhost:5001/auth/login',{email:data.email});
             setEmail(data.email);
         },
         onSuccess:()=>{
