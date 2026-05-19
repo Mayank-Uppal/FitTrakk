@@ -4,16 +4,16 @@ import type { UseFormRegister, FieldErrors, UseFormHandleSubmit } from "react-ho
 import Button from "../Button Component/Button";
 
 interface Prop{
-  id:number,
-  type:string,
-  placeholder:string,
+  id?:number,
+  type?:string,
+  placeholder?:string,
   span?:string,
   name?:string
 }
 
 interface InputProp{
   input:Prop[],
-  onsubmit?:()=>void,
+  onsubmit?:(data:any)=>void,
   register: UseFormRegister<any>
   errors: FieldErrors
   handleSubmit: UseFormHandleSubmit<any>

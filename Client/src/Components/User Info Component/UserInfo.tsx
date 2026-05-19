@@ -25,8 +25,11 @@ export default function UserInfo() {
         if(step==1)setWeightOp(prev=>!prev)
     }
     const active=step===0?heightOp:weightOp;
+    // @ts-ignore
     const heightForm=useForm<heightForm>({resolver:zodResolver(heightSchema)})
+    // @ts-ignore
     const weightForm=useForm<weightForm>({resolver:zodResolver(weightSchema)})
+    // @ts-ignore
     const ageForm=useForm<ageForm>({resolver:zodResolver(ageSchema)})
     const goalForm=useForm<goalForm>({resolver:zodResolver(goalSchema)});
 

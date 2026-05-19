@@ -21,6 +21,7 @@ export const emailSchema=z.object({
 export const heightSchema=z.object({
     height:z.coerce.number().min(30,'Height should be greater than 30 cm').max(250,'Height should be less than 250 cm')
 })
+
 export const weightSchema=z.object({
     weight:z.coerce.number().min(30,'Weight should be greater than 30 kg')
 })
@@ -32,13 +33,13 @@ export const goalSchema=z.object({
     goal:z.string().min(1,"required")
 })
 
-export const otpSchema=z.object({
-    otp1:z.coerce.number().max(9,"Required"),
-    otp2:z.coerce.number().max(9,"Required"),
-    otp3:z.coerce.number().max(9,"Required"),
-    otp4:z.coerce.number().max(9,"Required"),
-    otp5:z.coerce.number().max(9,"Required"),
-    otp6:z.coerce.number().max(9,"Required"),
+export const otpSchema = z.object({
+    otp1: z.string().min(1, "Required").max(1, "Required"),
+    otp2: z.string().min(1, "Required").max(1, "Required"),
+    otp3: z.string().min(1, "Required").max(1, "Required"),
+    otp4: z.string().min(1, "Required").max(1, "Required"),
+    otp5: z.string().min(1, "Required").max(1, "Required"),
+    otp6: z.string().min(1, "Required").max(1, "Required"),
 })
 
 export type MealForm=z.infer<typeof mealSchema>

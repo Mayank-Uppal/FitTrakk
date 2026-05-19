@@ -34,7 +34,7 @@ export const allInputs = [
         { id: 1, type: "number", placeholder: "Enter your weight (e.g 60 kg)",name:"weight" },
     ],
     [
-        { id: 1, type: "text", placeholder: "Your Age",name:"age" }
+        { id: 1, type: "number", placeholder: "Your Age",name:"age" }
     ],
     [
         { id: 1, type: "radio", span: "I want to lose fat and look leaner", name: "goal" },
