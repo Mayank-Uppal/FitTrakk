@@ -8,6 +8,9 @@ import UserInfo from './Components/User Info Component/UserInfo'
 import {BrowserRouter,Route,Routes} from 'react-router';
 import Log from './Components/Log Component/Log';
 import AllLog from './Components/Complete Log Component/AllLog';
+import Logs from './Components/Loading Component/Logs';
+import Dashboard from './Components/Loading Component/Dashboard';
+import Summary from './Components/Loading Component/Summary';
 
 
 function App() {
@@ -21,6 +24,9 @@ function App() {
         <Route path='/log' element={<Protected><Track/></Protected>}></Route>
         <Route path='/alllogs' element={<Protected><Log/></Protected>}></Route>
         <Route path='/alllogs/details' element={<Protected><AllLog/></Protected>}></Route>
+        <Route path='l' element={<Logs/>}></Route>
+        <Route path='/d' element={<Dashboard/>}></Route>
+        <Route path='/s' element={<Summary/>}></Route>
       </Routes>
     </BrowserRouter>
     </>

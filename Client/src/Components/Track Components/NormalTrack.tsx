@@ -36,7 +36,7 @@ export default function NormalTrack() {
       setinputcount(index)
     }
   }
-  useQuery({
+useQuery({
     queryKey:[],
     queryFn:async()=>{
       const res=await axios.get(`https://fittrakk.onrender.com/track?date=${new Date().toDateString()}`,{headers:{

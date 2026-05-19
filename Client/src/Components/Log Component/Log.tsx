@@ -5,6 +5,7 @@ import axios from "axios";
 import { getCookie } from "../Protected Component/Protected";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import Logs from "../Loading Component/Logs";
 
 export default function Log() {
     const [logsData,allLogsData]=useState<any>([]);
@@ -12,7 +13,7 @@ export default function Log() {
     const handleClick=async(index:number)=>{
         navigate(`/alllogs/details?date=${logsData[index].dates}`)
     }
-    useQuery({
+    const {isPending}=useQuery({
         queryKey:[],
         queryFn:async()=>{
             const res=await axios.get("https://fittrakk.onrender.com/track/all-logs",{headers:{
@@ -23,14 +24,17 @@ export default function Log() {
     })
   return (
     <>
-    <div className="flex flex-row w-full">
+    {isPending ? <Logs/>:(
+      <div className="flex flex-row w-full">
           <div className=" fixed w-1/5">
             <Sidebar/>
           </div>
+          
           <div className="w-full ml-85 min-h-screen bg-slate-950 px-10 py-10">
             <Card allLog={logsData}  handleClick={handleClick}/>
           </div>      
     </div>
+    )}
     </>
   )
 }

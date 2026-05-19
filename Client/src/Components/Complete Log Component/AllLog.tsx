@@ -7,6 +7,7 @@ import Button from '../Button Component/Button'
 import { icons } from '../Track Components/Props'
 import Table from '../Track Components/Table'
 import NewCard from './newCard'
+import Summary from '../Loading Component/Summary'
 
 export default function AllLog() {
     const navigate=useNavigate();
@@ -15,7 +16,7 @@ export default function AllLog() {
     const [logData,setLogDate]=useState<any>({});
     const [mealData,setMealData]=useState<any>([]);
 
-    useQuery({
+    const {isPending}=useQuery({
         queryKey:[],
         queryFn:async()=>{
             const res=await axios.get(`https://fittrakk.onrender.com/track?date=${date}`,{headers:{
@@ -32,7 +33,8 @@ export default function AllLog() {
     
   return (
     <>
-    <div className='min-h-screen bg-slate-950'>
+    {isPending?<Summary/>:(
+         <div className='min-h-screen bg-slate-950'>
         <div className='flex flex-row justify-between items-center'>
             <p className='text-white/60 font-body text-2xl mx-10 py-10 '>Log Summary - {date}</p>
         </div>
@@ -53,6 +55,7 @@ export default function AllLog() {
             </div>
 
     </div>
+    )}
     </>
   )
 }

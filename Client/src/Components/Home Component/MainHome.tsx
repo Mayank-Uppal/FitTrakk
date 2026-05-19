@@ -6,6 +6,7 @@ import axios from "axios";
 import { getCookie } from "../Protected Component/Protected";
 import { useState } from "react";
 import { titles,icons } from "./props";
+import Dashboard from "../Loading Component/Dashboard";
 
 
 export default function MainHome() {
@@ -16,7 +17,7 @@ export default function MainHome() {
     console.log(actual)
 
 
-    useQuery({
+    const {isPending}=useQuery({
         queryKey:[],
         queryFn:async()=>{
             const accessToken=getCookie('accessToken');
@@ -36,7 +37,8 @@ export default function MainHome() {
     const button=[{id:1,text:"Add log",reverse:false,handleClick:()=>navigate('/log')}]
   return (
     <>
-    <div className="flex flex-col bg-slate-950  min-h-screen ">
+    {isPending?<Dashboard/>:(
+        <div className="flex flex-col bg-slate-950  min-h-screen ">
 
             <div className=" mx-15 mt-7 text-center">
                 <p className="text-2xl text-white/85 font-body "> Hey, here's your progress 💪</p>
@@ -54,7 +56,7 @@ export default function MainHome() {
                 <Button buttons={button}/>
             </div>     
     </div>
-
+    )}
     </>
   )
 }

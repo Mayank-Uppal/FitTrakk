@@ -11,6 +11,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from 'axios'
 import RedirectingAI from "../Redirecting Component/RedirectingAI";
 import { getCookie } from "../Protected Component/Protected";
+import { useEffect } from "react";
 
 
 export default function UserInfo() {
@@ -19,6 +20,18 @@ export default function UserInfo() {
     const weightOp=true;
     const [userData,setUserData]=useState<any>({});
     const [step,setstep]=useState<number>(0);
+
+    useEffect(()=>{
+            const islogin=async()=>{
+                const accessToken = getCookie('accessToken') ;
+                const refeshToken = getCookie('refreshToken');
+            
+                if(accessToken || refeshToken){
+                    navigate("/home");
+                }
+            }
+            islogin();
+    },[getCookie('accessToken'),getCookie('refreshToken')])
     
     /* const handlebtn=()=>{
         if(step==0)setHeightOp(prev=>!prev)
