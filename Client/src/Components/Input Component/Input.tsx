@@ -14,10 +14,10 @@ interface Prop{
 interface InputProp{
   input:Prop[],
   onsubmit?:(data:any)=>void,
-  register: UseFormRegister<any>
-  errors: FieldErrors
-  handleSubmit: UseFormHandleSubmit<any>
-  buttons:any[]
+  register?: UseFormRegister<any>
+  errors?: FieldErrors
+  handleSubmit?: UseFormHandleSubmit<any>
+  buttons?:any[]
 }
 
 export default function Input({input,register,errors,handleSubmit,onsubmit,buttons}:InputProp) {
@@ -45,7 +45,7 @@ export default function Input({input,register,errors,handleSubmit,onsubmit,butto
       }
   }
   return (
-    <form onSubmit={handleSubmit(onsubmit)} className="w-full flex flex-col mt-4 gap-4">
+    <form onSubmit={handleSubmit(onsubmit!)} className="w-full flex flex-col mt-4 gap-4">
       <div className={`flex ${input[0]?.name?.includes('otp') ? 'flex-row' : 'flex-col'} gap-4`}>
       {input.map((i,index)=>(
         <>

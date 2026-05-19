@@ -19,7 +19,7 @@ export default function Sidebar(/* {dashboard}:dashboard */) {
         <ul className="mt-20 space-y-1">
             {dashboard.map((d,index)=>(
                  <li key={index}>
-                    <Link to={d.text==="Dashboard"?"/home":d.text==="All Logs"?"/alllogs":null} className="block font-body text-white/60 hover:bg-green-400/30 hover:scale-102 duration-300 hover:p-4 rounded-lg my-7  px-4 py-4 text-sm font-medium ">
+                    <Link to={d.text==="Dashboard"?"/home":d.text==="All Logs"?"/alllogs":'/'} className="block font-body text-white/60 hover:bg-green-400/30 hover:scale-102 duration-300 hover:p-4 rounded-lg my-7  px-4 py-4 text-sm font-medium ">
                     {d.text}
                     </Link>
                 </li>
