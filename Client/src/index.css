@@ -7,7 +7,7 @@
 
 @theme {
   --font-heading: 'Bebas Neue', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-body: Menlo, Monaco, Consolas, monospace;
 }
 
 @custom-variant dark (&:is(.dark *));
