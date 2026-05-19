@@ -27,6 +27,7 @@ export default function UserInfo() {
                     const res=await axios.get("https://fittrakk.onrender.com/user",{headers:{
                     Authorization:`Bearer ${getCookie("accessToken")}`
                     }})
+                    console.log(res.data.data)
                     if(res.data.data===true){
                         navigate("/home")
                     }
@@ -37,6 +38,7 @@ export default function UserInfo() {
             islogin();
     },[])
     
+
     /* const handlebtn=()=>{
         if(step==0)setHeightOp(prev=>!prev)
         if(step==1)setWeightOp(prev=>!prev)

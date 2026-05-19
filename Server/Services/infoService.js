@@ -17,6 +17,7 @@ export const userInfo=async({userEmail},{height,weight,age,goal})=>{
 
 export const dataUser=async({userId})=>{
     try {
+        console.log(userId)
         const user=await userModel.findById(userId);
         if(!user)return {message:"User not found",status:404};
         const isinfo=!!(user.height,user.weight,user.age,user.goal);

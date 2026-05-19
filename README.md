@@ -37,26 +37,41 @@ A full stack fitness tracking web application that helps users monitor their dai
 
 ## API Endpoints
 
+### Auth Routes
+
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | POST | /auth/login | Send OTP to email |
 | POST | /auth/otp-validate | Validate OTP + get tokens |
 | POST | /auth/refresh | Refresh access token |
 
+### Info Routes
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /user | Check if user information present or not |
+| POST | /auth/otp-validate | Validate OTP + get tokens |
+| POST | /auth/refresh | Refresh access token |
+
 ### User Routes
+
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | /auth/user | Get user data |
-| POST | /objectives | Save user fitness goals |
-| GET | /log/goalData | Get AI generated daily goals |
-| POST | /log/data | Log user data |
+| POST | /objectives | Calculates ideal goals of user and save it in db |
+
+### Log Routes
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /goalData | Returns the ideal goals of user |
 
 ### Track Routes
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | /track | Get today's log |
+| GET | / | Returns all the logs and meal data of user of specific date |
 | GET | /track/dashboard | Get daily averages for dashboard |
 | GET | /track/all-logs | Get all logs history |
 | POST | /track/meal | Log meal with AI calorie calculation |
-| POST | /track/steps | Log daily steps |
-| POST | /track/gym | Log gym workout |
+| POST | /track/steps | Log daily steps with cal burned |
+| POST | /track/gym | Log gym workout with cal burned |

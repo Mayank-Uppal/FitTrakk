@@ -1,13 +1,5 @@
 import { userModel } from "../Model/user.js";
 
-export const userLog=async({data})=>{
-    try {
-        return;
-    } catch (error) {
-        throw new Error(`Failed to send OTP to ${email} ${error.message}`);
-    }
-}
-
 export const goalDataUser=async({userId})=>{
     try {
         const user=await userModel.findById(userId);    
