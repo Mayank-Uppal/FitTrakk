@@ -12,8 +12,10 @@ export const mealAdd =async({userId},{qty,meal})=>{
 
         let track = await trackModel.findOne({userId})
         if(!track)track=new trackModel({userId,logs:[]})
-        const today=new Date().toDateString();
-        const logExist=track.logs.find((log)=>new Date(log.date).toDateString() === today);
+        const today = new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })
+        const logExist = track.logs.find(log => 
+            new Date(log.date).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' }) === today
+        )
         
         if(logExist){
             logExist.totalCalorie+=Number(calorie)
@@ -45,8 +47,10 @@ export const stepsAdd=async({userId},{steps,calBurn})=>{
         }
         let track = await trackModel.findOne({userId})
         if(!track)track=new trackModel({userId,logs:[]})
-        const today=new Date().toDateString();
-        const logExist=track.logs.find((log)=>new Date(log.date).toDateString() === today);
+        const today = new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })
+        const logExist = track.logs.find(log => 
+            new Date(log.date).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' }) === today
+        )
         if(logExist){
             logExist.calBurn+=Number(calBurn)
             logExist.steps+=Number(steps)
@@ -73,8 +77,10 @@ export const gymAdd=async({userId},{time,calBurn})=>{
         }
         let track = await trackModel.findOne({userId})
         if(!track)track=new trackModel({userId,logs:[]})
-        const today=new Date().toDateString();
-        const logExist=track.logs.find((log)=>new Date(log.date).toDateString() === today);
+        const today = new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })
+        const logExist = track.logs.find(log => 
+            new Date(log.date).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' }) === today
+        )
         if(logExist){
             logExist.calBurn+=Number(calBurn)
             logExist.gym+=Number(time)
@@ -102,9 +108,9 @@ export const dataAll=async({userId},{date})=>{
         let track = await trackModel.findOne({userId})
         const emptyLog = { totalCalorie: 0, protein: 0, carbs: 0, fat: 0, netcalorie: 0, steps: 0, gym: 0, calBurn: 0 }
         if(!track)return {data:emptyLog,status:200};
-        const log=track.logs.find(log=>new Date(log.date).toDateString()===date)
+        const log=track.logs.find(log=>new Date(log.date).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })===date)
         const logData={totalCalorie:log.totalCalorie,protein:log.protein,carbs:log.carbs,fat:log.fat,netcalorie:log.netcalorie,steps:log.steps,gym:log.gym};
-        const mealData=track.meals.filter(m=>new Date(m.time).toDateString()===date)
+        const mealData=track.meals.filter(m=>new Date(m.time).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })===date)
         return {data:{logData,mealData }|| emptyLog,status:200}
     } catch (error) {
         console.log("EXACT ERROR:", error.message) 
@@ -155,7 +161,7 @@ export const logsAll=async({userId})=>{
 
         const dates=track.logs.map((logs)=>{
             const info={
-                dates:new Date(logs.date).toDateString(),
+                dates:new Date(logs.date).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' }),
                 totalCalorie:logs.totalCalorie,
                 totalSteps:logs.steps,
                 totalGym:logs.gym

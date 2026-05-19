@@ -39,7 +39,7 @@ export default function NormalTrack() {
 useQuery({
     queryKey:[],
     queryFn:async()=>{
-      const res=await axios.get(`https://fittrakk.onrender.com/track?date=${new Date().toDateString()}`,{headers:{
+      const res=await axios.get(`https://fittrakk.onrender.com/track?date=${new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}`,{headers:{
           Authorization:`Bearer ${getCookie("accessToken")}`
         }})
       setmealData(res.data.data.mealData)
