@@ -42,7 +42,7 @@ useQuery({
       const res=await axios.get(`https://fittrakk.onrender.com/track?date=${new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}`,{headers:{
           Authorization:`Bearer ${getCookie("accessToken")}`
         }})
-      setmealData(res.data.data.mealData)
+      setmealData(res.data.data.mealData ?? [])
       setCardData(res.data.data.logData);
       return res.data;
     }
@@ -123,7 +123,7 @@ const allButtons=[
             />}
         </div>
 
-      {inputcount<=0 && mealData.length>0?(
+      {inputcount<=0 && (mealData?.length??0)>0?(
          <div className={`${inputcount<0?'w-full px-10 text-center mt-0 ':'w-2/3 mt-10 mr-10'} `}>
           <Table MealData={mealData}/>
         </div>

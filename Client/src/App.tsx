@@ -24,9 +24,6 @@ function App() {
         <Route path='/log' element={<Protected><Track/></Protected>}></Route>
         <Route path='/alllogs' element={<Protected><Log/></Protected>}></Route>
         <Route path='/alllogs/details' element={<Protected><AllLog/></Protected>}></Route>
-        <Route path='l' element={<Logs/>}></Route>
-        <Route path='/d' element={<Dashboard/>}></Route>
-        <Route path='/s' element={<Summary/>}></Route>
       </Routes>
     </BrowserRouter>
     </>
