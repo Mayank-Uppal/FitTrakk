@@ -33,7 +33,7 @@ export default function Auth() {
             }
         }
         islogin();
-    },[])
+    },[getCookie('accessToken'),getCookie('refreshToken')])
 
     const {mutate:emailMutate,isPending:emailPending}=useMutation({
         mutationFn:async(data:emailForm)=>{
@@ -41,7 +41,6 @@ export default function Auth() {
             setEmail(data.email);
         },
         onSuccess:()=>{
-
             setauth(false);
             setotp(true);
         },
@@ -58,8 +57,8 @@ export default function Auth() {
             return res.data;
         },
         onSuccess:(data)=>{
-            document.cookie=`accessToken=${data.accessToken}`
-            document.cookie=`refreshToken=${data.refreshToken}`
+            document.cookie = `accessToken=${data.accessToken}; path=/; SameSite=Lax; max-age=3600;`
+            document.cookie = `refreshToken=${data.refreshToken}; path=/; SameSite=Lax; max-age=604800;`
             setRedirect(true);
             setTimeout(() => {
                 navigate("/onboarding")
@@ -72,8 +71,8 @@ export default function Auth() {
     const otpbuttons=[{id:1,text: otpPending ? "Validating OTP...":"Login",reverse:false}]
     return (
         <>
-        {redirect && <Redirecting/>}
-        <div className="flex flex-col bg-zinc-950 overflow-hidden h-screen">
+        {redirect?<Redirecting/>:(
+            <div className="flex flex-col bg-slate-950 overflow-hidden h-screen">
             <Navbar />
             <div className="h-screen flex flex-col items-center justify-center text-center gap-3 ">
                 {auth ? (
@@ -89,7 +88,7 @@ export default function Auth() {
                         register={emailForm.register} 
                         errors={emailForm.formState.errors}  
                         handleSubmit={emailForm.handleSubmit}
-                        onsubmit={emailMutate}
+                        onsubmit={() => emailForm.handleSubmit((data) => emailMutate(data))()}
                         buttons={authbuttons}
                         />
                     </div>
@@ -108,7 +107,7 @@ export default function Auth() {
                         register={otpForm.register} 
                         errors={otpForm.formState.errors}
                         handleSubmit={otpForm.handleSubmit}
-                        onsubmit={otpMutate}
+                        onsubmit={() => otpForm.handleSubmit((data) => otpMutate(data))()}
                         buttons={otpbuttons}
                         />
                     </div>
@@ -119,6 +118,7 @@ export default function Auth() {
                 )}
             </div>
         </div>
+        )}
         </>
     )
 }

@@ -20,8 +20,9 @@ export default function Protected({children}:any) {
             }
             else if(!accessToken && refeshToken){
                 try {
-                    const res=await axios.get('http://localhost:5001/refresh', { headers: { Authorization: `Bearer ${refeshToken}` } })
-                    document.cookie=`accessToken=${res.data.accessToken};`;
+                    const res=await axios.post('http://localhost:5001/auth/refresh',{refeshToken:refeshToken},{ headers: { Authorization: `Bearer ${refeshToken}` } })
+                    document.cookie = `accessToken=${res.data.accessToken}; path=/; SameSite=Lax; max-age=3600;`
+                    console.log(res.data)
                     setstatus("authorized");
                 } catch (error) {
                     console.log(error);
@@ -34,10 +35,12 @@ export default function Protected({children}:any) {
         }
         checkAuth();
     },[])   
+
+    console.log("protected",status)
     return(
         <>
-        {status==="pending" && <div className="w-full h-screen bg-zinc-950 flex items-center justify-center text-white font-body text-xl">Checking authentication...</div>}
-        {status==="unauthorized" && <Navigate to={"/auth/login"}/>}
+        {status==="pending" && <div className="w-full h-screen bg-slate-950 flex items-center justify-center text-white font-body text-xl">Checking authentication...</div>}
+        {status==="unauthorized" && <Navigate to={"/"}/>}
         {status==="authorized" && children}
         </>
     )

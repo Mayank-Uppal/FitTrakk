@@ -12,6 +12,7 @@ import axios from 'axios'
 import RedirectingAI from "../Redirecting Component/RedirectingAI";
 import { getCookie } from "../Protected Component/Protected";
 
+
 export default function UserInfo() {
     const navigate=useNavigate();
     const [heightOp,setHeightOp]=useState<boolean>(true);
@@ -72,8 +73,8 @@ export default function UserInfo() {
     }]
   return (
     <>
-    {goalPending && <RedirectingAI/>}
-    <div className="flex flex-col bg-zinc-950 overflow-hidden h-screen">
+    {goalPending?<RedirectingAI/>:(
+        <div className="flex flex-col bg-slate-950 overflow-hidden h-screen">
         <Navbar />
         <div className="h-screen flex flex-col mt-20 items-center text-center gap-3 ">
 
@@ -123,6 +124,8 @@ export default function UserInfo() {
             </div>
         </div>     
     </div>      
+    )}
+    
     </>  
   )
 }

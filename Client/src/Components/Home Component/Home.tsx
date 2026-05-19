@@ -2,12 +2,13 @@ import Sidebar from "../SideBar Component/Sidebar";
 import MainHome from "./MainHome";
 
 export default function Home() {
+  
   return (
     <div className="flex flex-row w-full">
-      {/* <div className="w-1/6">
+      <div className="w-1/5">
         <Sidebar/>
-      </div> */}
-      <div className="w-full">
+      </div>
+      <div className="w-4/5">
         <MainHome/>
       </div>      
     </div>

@@ -1,7 +1,37 @@
 import Header from "../Heading Component/Header";
 import Button from "../Button Component/Button";
+import { useEffect } from "react";
+import { getCookie } from "../Protected Component/Protected";
+import { useNavigate } from "react-router";
+import axios from "axios";
 
 export default function NormalHome({homebuttons}) {
+  const navigate=useNavigate();
+    useEffect(()=>{
+            const islogin=async()=>{
+                const accessToken = getCookie('accessToken') ;
+                const refreshToken = getCookie('refreshToken');
+            
+                if(accessToken){
+                    navigate("/home");
+                }
+                else if(!accessToken && refreshToken){
+                    try {
+                        const res=await axios.post('http://localhost:5001/auth/refresh', {refreshToken:refreshToken},{ headers: { Authorization: `Bearer ${refreshToken}` } })
+                        document.cookie = `accessToken=${res.data.accessToken}; path=/; SameSite=Lax; max-age=3600;`
+                        navigate('/home')
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }
+                else{
+                    navigate('/')
+                }
+            }
+            islogin();
+        },[])
+
+        console.log("refresh",getCookie('refreshToken'));
   return (
     <>
     <Header

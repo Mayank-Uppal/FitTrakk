@@ -4,8 +4,6 @@ dotenv.config();
 
  const jwtVerify=async(req,res,next)=>{
     const authHeader=req.headers.authorization;
-    console.log("middleware hit!")                           // ✅ add this
-  console.log("auth header:", req.headers.authorization) 
     if(!authHeader)return res.status(404).json("Token not found");
     const token=authHeader.split(' ')[1];
     try {

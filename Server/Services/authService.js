@@ -15,16 +15,27 @@ export const userLogin=async({email})=>{
 export const userOtp=async({email,otp})=>{
     try {
         if(otp === OTP){
-            const isuser=await userModel.findOne({email:email});
+            let isuser=await userModel.findOne({email:email});
             if(!isuser){
-                const newUser=new userModel({email:email});
-                await newUser.save();
+                isuser=new userModel({email:email});
+                await isuser.save();
             }
-            const accessToken=jwt.sign({userEmail:newUser.email },process.env.secretKey,{expiresIn:"1h"})
-            const refreshToken=jwt.sign({userEmail:newUser.email},process.env.secretKey,{expiresIn:"7d"})
+            const accessToken=jwt.sign({userId:isuser._id,userEmail:isuser.email },process.env.secretKey,{expiresIn:"1h"})
+            const refreshToken=jwt.sign({userId:isuser._id,userEmail:isuser.email},process.env.secretKey,{expiresIn:"7d"})
             return {message:"OTP validated successfully",accessToken:accessToken,refreshToken:refreshToken,status:200}
-        }
+            }
+            return {message:"Invalid OTP",status:401}
     } catch (error) {
         throw new Error('Error in authenticating User from OTP ');
+    }
+}
+
+export const refreshToken=async({refreshToken})=>{
+    try {
+        const istoken=jwt.verify(refreshToken,process.env.secretKey);
+        const accessToken=jwt.sign({userId:istoken.userId,userEmail:istoken.userEmail},process.env.secretKey,{expiresIn:"1h"});
+        return {message:"Access Token send",status:200,accessToken:accessToken};
+    } catch (error) {
+        throw new Error('Error in retruning the access token User from OTP ');
     }
 }

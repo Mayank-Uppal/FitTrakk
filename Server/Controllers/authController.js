@@ -1,4 +1,4 @@
-import { userLogin,userOtp } from "../Services/authService.js";
+import { userLogin,userOtp,refreshToken} from "../Services/authService.js";
 
 export const loginUser=async(req,res)=>{
     try {
@@ -16,6 +16,16 @@ export const otpUser=async(req,res)=>{
         return res.status(otpUserResponse.status).json(otpUserResponse);
     } catch (error) {
         console.log(error);
+        return res.status(500).json("Internal server error")
+    }
+}
+
+export const tokenRefresh=async(req,res)=>{
+    try {
+        const tokenRefreshResponse=await refreshToken(req.body);
+        return res.status(tokenRefreshResponse.status).json(tokenRefreshResponse);
+    } catch (error) {
+        console.log(error)
         return res.status(500).json("Internal server error")
     }
 }

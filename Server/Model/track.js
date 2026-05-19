@@ -8,31 +8,51 @@ const trackSchema=new mongoose.Schema({
     },
     logs:[{
         steps:{
-            type:Number
+            type:Number,
+            default:0
         },
         totalCalorie:{
-            type:Number
+            type:Number,
+            default:0
         },
-        netCalorie:{
-            type:Number
+        calBurn:{
+            type:Number,
+            default:0
         },
         protein:{
-            type:Number
+            type:Number,
+            default:0
         },
         carbs:{
-            type:Number
+            type:Number,
+            default:0
         },
         fat:{
-            type:Number
+            type:Number,
+            default:0
         },
         gym:{
-            type:String
+            type:Number,
+            default:0
+        },
+        netcalorie:{
+            type:Number,
+            default:0
         },
         date:{
             type:Date,
             default:Date.now
         }
-    }]
+    }],
+    meals:[{
+            qty:{type:Number,default:0},
+            meal:{type:String},
+            calorie:{type:Number,default:0},
+            protein:{type:Number,default:0},
+            carbs:{type:Number,default:0},
+            fat:{type:Number,default:0},
+            time: { type: Date, default: Date.now }
+        }],
 },{timestamps:true})
 
 export const trackModel=mongoose.model("trackModel",trackSchema);

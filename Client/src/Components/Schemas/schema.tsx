@@ -2,16 +2,16 @@ import {z} from 'zod';
 
 export const mealSchema=z.object({
     qty:z.string().min(1,'Value should be greater than 0 g').max(4000,'Value should be less than 4000 g '),
-    mealName:z.string().min(1,"Meal Name Required")
+    meal:z.string().min(1,"Meal Name Required")
 })
 
 export const stepsSchema=z.object({
     steps:z.string().min(1,"Time (in minutes) required"),
-    calBurn:z.string().min(1,"Body part trained required")
+    calBurn:z.string().min(1,"Required")
 })
 export const gymSchema=z.object({
     time:z.string().min(1,"Time (in minutes) required"),
-    workout:z.string().min(1,"Body part trained required")
+    gymBurn:z.string().min(1,"Required")
 })
 
 export const emailSchema=z.object({
@@ -33,12 +33,12 @@ export const goalSchema=z.object({
 })
 
 export const otpSchema=z.object({
-    otp1:z.string().length(1,"Required"),
-    otp2:z.string().length(1,"Required"),
-    otp3:z.string().length(1,"Required"),
-    otp4:z.string().length(1,"Required"),
-    otp5:z.string().length(1,"Required"),
-    otp6:z.string().length(1,"Required"),
+    otp1:z.coerce.number().max(9,"Required"),
+    otp2:z.coerce.number().max(9,"Required"),
+    otp3:z.coerce.number().max(9,"Required"),
+    otp4:z.coerce.number().max(9,"Required"),
+    otp5:z.coerce.number().max(9,"Required"),
+    otp6:z.coerce.number().max(9,"Required"),
 })
 
 export type MealForm=z.infer<typeof mealSchema>
