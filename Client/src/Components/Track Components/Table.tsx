@@ -34,7 +34,7 @@ export default function Table({MealData}:MealProp) {
             <tbody className="divide-y  ">
                 {MealData?.map((m,index)=>(
                     <tr key={index} className="*:text-white *:first:font-medium">
-                        <td className="px-3 py-2 whitespace-nowrap">{m?.meal?.charAt(0).toUpperCase() + m?.meal?.slice(1).toLowerCase()}</td>
+                        <td className="px-3 py-2 whitespace-nowrap">{m?.meal?.charAt(0)?.toUpperCase() + m?.meal?.slice(1).toLowerCase()}</td>
                         <td className="px-3 py-2 whitespace-nowrap">{mealType.charAt(0).toUpperCase() + mealType.slice(1).toLowerCase()}</td>
                         <td className="px-3 py-2 whitespace-nowrap">{m.qty} g</td>
                         <td className="px-3 py-2 whitespace-nowrap">
