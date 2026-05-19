@@ -14,13 +14,16 @@ export default function Log() {
         navigate(`/alllogs/details?date=${logsData[index].dates}`)
     }
     const {isPending}=useQuery({
-        queryKey:[],
+        queryKey:['logs'],
         queryFn:async()=>{
             const res=await axios.get("https://fittrakk.onrender.com/track/all-logs",{headers:{
                 Authorization:`Bearer ${getCookie("accessToken")}`
             }})
             allLogsData(res.data.data)
-        }
+            return res.data
+        },
+        staleTime: 0,  
+        refetchOnMount: true 
     })
   return (
     <>

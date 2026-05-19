@@ -18,7 +18,7 @@ export default function MainHome() {
 
 
     const {isPending}=useQuery({
-        queryKey:[],
+        queryKey:['dashboard'],
         queryFn:async()=>{
             const accessToken=getCookie('accessToken');
             const response=await axios.get('https://fittrakk.onrender.com/log/goalData',{headers:{
@@ -31,6 +31,8 @@ export default function MainHome() {
             setgoal([response.data.data]);
             return response.data;
         },
+        staleTime: 0,  
+        refetchOnMount: true 
     })
     const goalValues=goal.length>0?Object.values(goal[0]):[];
     const actualValues=[actual.totalCalorie,actual.totalSteps,actual.totalNetCalorie,actual.totalCarbs,actual.totalProtein,actual.totalFat];

@@ -17,14 +17,17 @@ export default function AllLog() {
     const [mealData,setMealData]=useState<any>([]);
 
     const {isPending}=useQuery({
-        queryKey:[],
+        queryKey:['summary'],
         queryFn:async()=>{
             const res=await axios.get(`https://fittrakk.onrender.com/track?date=${date}`,{headers:{
             Authorization:`Bearer ${getCookie("accessToken")}`
             }}) 
             setLogDate(res.data.data.logData);
             setMealData(res.data.data.mealData);
-        }
+            return res.data;
+        },
+        staleTime: 0,  
+        refetchOnMount: true 
     })
      const props=[{icons:icons[0],title:"Calories",data:logData?.totalCalorie  ?? 0},{icons:icons[1],title:"Steps",data:logData?.steps ?? 0},
       {icons:icons[2],title:"Net Calories",data:logData?.netcalorie ?? 0},{icons:icons[3],title:"Protein Intake (in g)",data:logData?.protein ?? 0},
