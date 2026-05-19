@@ -2,7 +2,7 @@
 
 A full stack fitness tracking web application that helps users monitor their daily nutrition, steps, and workouts. Built with the MERN stack and powered by Groq AI for intelligent calorie calculation and personalized fitness goal generation.
 
-🔗 **Live Demo:** your-vercel-url.vercel.app
+🔗 **Live Demo:** https://fittrakk-qlq7zi6fr-kshitijjjs-projects.vercel.app/home
 
 ---
 
