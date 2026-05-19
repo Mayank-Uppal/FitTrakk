@@ -21,7 +21,7 @@ export const mealAdd =async({userId},{qty,meal})=>{
             logExist.carbs+=Number(carbs)
             logExist.fat+=Number(fat)
             logExist.netcalorie = Number(Number(logExist.totalCalorie) - Number(logExist.calBurn))
-            track.meals.push({qty:qty,meal:meal,calorie:calorie,protein:protein,carbs:carbs,fat:fat})
+            track.meals.push({qty:Number(qty),meal:meal,calorie:Number(calorie),protein:Number(protein),carbs:Number(carbs),fat:Number(fat)})
             await track.save();
             return {message:"Meal Calculated and saved successfully",data:{totalCalorie:logExist.totalCalorie,protein:logExist.protein,carbs:logExist.carbs,fat:logExist.fat,netcalorie:logExist.netcalorie,steps:logExist.steps,gym:logExist.gym,meal:{qty,meal,calorie,protein,carbs,fat}},status:200};
 
