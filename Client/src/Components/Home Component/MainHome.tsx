@@ -32,7 +32,8 @@ export default function MainHome() {
             return response.data;
         },
         staleTime: 0,  
-        refetchOnMount: true 
+        refetchOnMount: true ,
+        gcTime:0
     })
     const goalValues=goal.length>0?Object.values(goal[0]):[];
     const actualValues=[actual.totalCalorie,actual.totalSteps,actual.totalNetCalorie,actual.totalCarbs,actual.totalProtein,actual.totalFat];

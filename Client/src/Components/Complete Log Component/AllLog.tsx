@@ -27,7 +27,8 @@ export default function AllLog() {
             return res.data;
         },
         staleTime: 0,  
-        refetchOnMount: true 
+        refetchOnMount: true ,
+        gcTime:0
     })
      const props=[{icons:icons[0],title:"Calories",data:logData?.totalCalorie  ?? 0},{icons:icons[1],title:"Steps",data:logData?.steps ?? 0},
       {icons:icons[2],title:"Net Calories",data:logData?.netcalorie ?? 0},{icons:icons[3],title:"Protein Intake (in g)",data:logData?.protein ?? 0},

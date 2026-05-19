@@ -23,7 +23,8 @@ export default function Log() {
             return res.data
         },
         staleTime: 0,  
-        refetchOnMount: true 
+        refetchOnMount: true ,
+        gcTime:0
     })
   return (
     <>
