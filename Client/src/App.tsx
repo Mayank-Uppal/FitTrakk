@@ -8,9 +8,6 @@ import UserInfo from './Components/User Info Component/UserInfo'
 import {BrowserRouter,Route,Routes} from 'react-router';
 import Log from './Components/Log Component/Log';
 import AllLog from './Components/Complete Log Component/AllLog';
-import Logs from './Components/Loading Component/Logs';
-import Dashboard from './Components/Loading Component/Dashboard';
-import Summary from './Components/Loading Component/Summary';
 
 
 function App() {
