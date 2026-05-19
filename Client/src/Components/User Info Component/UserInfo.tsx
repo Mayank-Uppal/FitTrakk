@@ -23,15 +23,19 @@ export default function UserInfo() {
 
     useEffect(()=>{
             const islogin=async()=>{
-                const accessToken = getCookie('accessToken') ;
-                const refeshToken = getCookie('refreshToken');
-            
-                if(accessToken || refeshToken){
-                    navigate("/home");
+                try {
+                    const res=await axios.get("https://fittrakk.onrender.com/user",{headers:{
+                    Authorization:`Bearer ${getCookie("accessToken")}`
+                    }})
+                    if(res.data.data===true){
+                        navigate("/home")
+                    }
+                } catch (error) {
+                    console.log(error)
                 }
             }
             islogin();
-    },[getCookie('accessToken'),getCookie('refreshToken')])
+    },[])
     
     /* const handlebtn=()=>{
         if(step==0)setHeightOp(prev=>!prev)
