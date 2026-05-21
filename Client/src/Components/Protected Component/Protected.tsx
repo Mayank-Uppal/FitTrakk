@@ -21,7 +21,7 @@ export default function Protected({children}:any) {
                     headers: { Authorization: `Bearer ${accessToken}` }
                 })
                 setstatus("authorized")
-            } catch (error) {
+            } catch (error:any) {
                 // ✅ user deleted or invalid token → clear cookies
                 document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
                 document.cookie = 'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
@@ -34,7 +34,7 @@ export default function Protected({children}:any) {
                     document.cookie = `accessToken=${res.data.accessToken}; path=/; SameSite=Lax; max-age=3600;`
                     console.log(res.data)
                     setstatus("authorized");
-                } catch (error) {
+                } catch (error:any) {
                     console.log("ERROR HIT - clearing cookies") // ✅ add this
                     console.log(error.response?.status) // what status?
                     document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'

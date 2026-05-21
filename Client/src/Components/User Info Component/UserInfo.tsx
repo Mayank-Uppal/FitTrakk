@@ -11,7 +11,6 @@ import { useMutation } from "@tanstack/react-query";
 import axios from 'axios'
 import RedirectingAI from "../Redirecting Component/RedirectingAI";
 import { getCookie } from "../Protected Component/Protected";
-import { useEffect } from "react";
 
 
 export default function UserInfo() {
