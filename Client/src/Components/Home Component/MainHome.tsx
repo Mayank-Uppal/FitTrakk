@@ -36,7 +36,7 @@ export default function MainHome() {
         gcTime:0
     })
     const goalValues=goal.length>0?Object.values(goal[0]):[];
-    const actualValues=[actual.totalCalorie,actual.totalSteps,actual.totalNetCalorie,actual.totalCarbs,actual.totalProtein,actual.totalFat];
+    const actualValues=[actual.totalCalorie??0,actual.totalSteps??0,actual.totalNetCalorie??0,actual.totalCarbs??0,actual.totalProtein??0,actual.totalFat??0];
     const button=[{id:1,text:"Add log",reverse:false,handleClick:()=>navigate('/log')}]
   return (
     <>
