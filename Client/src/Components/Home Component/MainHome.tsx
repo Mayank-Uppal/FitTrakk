@@ -21,10 +21,10 @@ export default function MainHome() {
         queryKey:['dashboard'],
         queryFn:async()=>{
             const accessToken=getCookie('accessToken');
-            const response=await axios.get('http://localhost:5001/log/goalData',{headers:{
+            const response=await axios.get('https://fittrakk.onrender.com/log/goalData',{headers:{
                 Authorization:`Bearer ${accessToken}`
             }});
-            const actualResponse=await axios.get('http://localhost:5001/track/dashboard',{headers:{
+            const actualResponse=await axios.get('https://fittrakk.onrender.com/track/dashboard',{headers:{
                 Authorization:`Bearer ${accessToken}`
             }});
             setactual(actualResponse.data.data);

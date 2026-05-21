@@ -37,7 +37,7 @@ export default function Auth() {
 
     const {mutate:emailMutate,isPending:emailPending}=useMutation({
         mutationFn:async(data:emailForm)=>{
-            await axios.post('http://localhost:5001/auth/login',{email:data.email});
+            await axios.post('https://fittrakk.onrender.com/auth/login',{email:data.email});
             setEmail(data.email);
         },
         onSuccess:()=>{
@@ -53,7 +53,7 @@ export default function Auth() {
     const {mutate:otpMutate,isPending:otpPending}=useMutation({
         mutationFn:async(data:any)=>{
             const otp=`${data.otp1}${data.otp2}${data.otp3}${data.otp4}${data.otp5}${data.otp6}`
-            const res=await axios.post("http://localhost:5001/auth/otp-validate",{email:email,otp:otp});
+            const res=await axios.post("https://fittrakk.onrender.com/auth/otp-validate",{email:email,otp:otp});
             return res.data;
         },
         onSuccess:async(data)=>{
@@ -61,7 +61,7 @@ export default function Auth() {
             document.cookie = `accessToken=${data.accessToken}; path=/; SameSite=Lax; max-age=3600;`
             document.cookie = `refreshToken=${data.refreshToken}; path=/; SameSite=Lax; max-age=604800;`
 
-            const res = await axios.get("http://localhost:5001/user", {
+            const res = await axios.get("https://fittrakk.onrender.com/user", {
                 headers: { Authorization: `Bearer ${data.accessToken}` }
             })
             

@@ -20,7 +20,7 @@ export default function UserInfo() {
     const weightOp=true;
     const [userData,setUserData]=useState<any>({});
     const [step,setstep]=useState<number>(0);
-    
+
     const active=step===0?heightOp:weightOp;
     // @ts-ignore
     const heightForm=useForm<heightForm>({resolver:zodResolver(heightSchema)})
@@ -53,7 +53,7 @@ export default function UserInfo() {
     const {mutate:goalMutate,isPending:goalPending}=useMutation({
         mutationFn:async(data:any)=>{
             console.log({...userData})
-            await axios.post('http://localhost:5001/objectives', 
+            await axios.post('https://fittrakk.onrender.com/objectives', 
             { ...userData, goal: data.goal },  
             { headers: { Authorization: `Bearer ${accessToken}` } }  
             )
