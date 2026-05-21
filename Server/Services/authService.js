@@ -32,6 +32,7 @@ export const userOtp=async({email,otp})=>{
 
 export const refreshToken=async({refreshToken})=>{
     try {
+        console.log("user token")
         const istoken=jwt.verify(refreshToken,process.env.secretKey);
         const accessToken=jwt.sign({userId:istoken.userId,userEmail:istoken.userEmail},process.env.secretKey,{expiresIn:"1h"});
         return {message:"Access Token send",status:200,accessToken:accessToken};

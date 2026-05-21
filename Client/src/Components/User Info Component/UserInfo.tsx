@@ -20,29 +20,7 @@ export default function UserInfo() {
     const weightOp=true;
     const [userData,setUserData]=useState<any>({});
     const [step,setstep]=useState<number>(0);
-
-    useEffect(()=>{
-            const islogin=async()=>{
-                try {
-                    const res=await axios.get("https://fittrakk.onrender.com/user",{headers:{
-                    Authorization:`Bearer ${getCookie("accessToken")}`
-                    }})
-                    console.log(res.data.data)
-                    if(res.data.data===true){
-                        navigate("/home")
-                    }
-                } catch (error) {
-                    console.log(error)
-                }
-            }
-            islogin();
-    },[])
     
-
-    /* const handlebtn=()=>{
-        if(step==0)setHeightOp(prev=>!prev)
-        if(step==1)setWeightOp(prev=>!prev)
-    } */
     const active=step===0?heightOp:weightOp;
     // @ts-ignore
     const heightForm=useForm<heightForm>({resolver:zodResolver(heightSchema)})
@@ -74,7 +52,8 @@ export default function UserInfo() {
     })
     const {mutate:goalMutate,isPending:goalPending}=useMutation({
         mutationFn:async(data:any)=>{
-            await axios.post('https://fittrakk.onrender.com/objectives', 
+            console.log({...userData})
+            await axios.post('http://localhost:5001/objectives', 
             { ...userData, goal: data.goal },  
             { headers: { Authorization: `Bearer ${accessToken}` } }  
             )

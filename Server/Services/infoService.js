@@ -1,6 +1,5 @@
 import { userModel } from "../Model/user.js";
 import { fetchIdealPhysique } from "../Config/geminiApi.js";
-import { use } from "react";
 
 export const userInfo=async({userEmail},{height,weight,age,goal})=>{
     try {
@@ -19,8 +18,8 @@ export const dataUser=async({userId})=>{
     try {
         console.log(userId)
         const user=await userModel.findById(userId);
-        if(!user)return {message:"User not found",status:404};
-        const isinfo=!!(user.height,user.weight,user.age,user.goal);
+        if(!user)return {data:false,status:404};
+        const isinfo=!!(user.height && user.weight && user.age && user.goal);
         return {data:isinfo,status:200}
     } catch (error) {
         throw new Error(`Failed to calculate the ideal physique for user  ${error.message}`);
