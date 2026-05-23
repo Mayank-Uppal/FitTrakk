@@ -16,7 +16,7 @@ export default function Log() {
     const {isPending}=useQuery({
         queryKey:['logs'],
         queryFn:async()=>{
-            const res=await axios.get("https://fittrakk.onrender.com/track/all-logs",{headers:{
+            const res=await axios.get("http://localhost:5001/track/all-logs",{headers:{
                 Authorization:`Bearer ${getCookie("accessToken")}`
             }})
             allLogsData(res.data.data)

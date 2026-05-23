@@ -39,7 +39,7 @@ export default function NormalTrack() {
 useQuery({
     queryKey:[],
     queryFn:async()=>{
-      const res=await axios.get(`https://fittrakk.onrender.com/track?date=${new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}`,{headers:{
+      const res=await axios.get(`http://localhost:5001/track?date=${new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}`,{headers:{
           Authorization:`Bearer ${getCookie("accessToken")}`
         }})
       setmealData(res.data.data.mealData ?? [])
@@ -54,7 +54,7 @@ useQuery({
 
 const {mutate:mealMutate,isPending:mealPending}=useMutation({
   mutationFn:async(data:any)=>{
-    const res=await axios.post('https://fittrakk.onrender.com/track/meal',{qty:data.qty,meal:data.meal},{headers:{
+    const res=await axios.post('http://localhost:5001/track/meal',{qty:data.qty,meal:data.meal},{headers:{
       Authorization:`Bearer ${getCookie("accessToken")}`
     }})
     return res.data;
@@ -68,7 +68,7 @@ const {mutate:mealMutate,isPending:mealPending}=useMutation({
 
 const {mutate:stepMutate,isPending:stepPending}=useMutation({
   mutationFn:async(data:any)=>{
-    const res=await axios.post('https://fittrakk.onrender.com/track/steps',{steps:data.steps,calBurn:data.calBurn},{headers:{
+    const res=await axios.post('http://localhost:5001/track/steps',{steps:data.steps,calBurn:data.calBurn},{headers:{
       Authorization:`Bearer ${getCookie("accessToken")}`
     }})
     return res.data;
@@ -81,7 +81,7 @@ const {mutate:stepMutate,isPending:stepPending}=useMutation({
 
 const {mutate:gymMutate,isPending:gymPending}=useMutation({
   mutationFn:async(data:any)=>{
-    const res=await axios.post('https://fittrakk.onrender.com/track/gym',{time:data.time,calBurn:data.gymBurn},{headers:{
+    const res=await axios.post('http://localhost:5001/track/gym',{time:data.time,calBurn:data.gymBurn},{headers:{
       Authorization:`Bearer ${getCookie("accessToken")}`
     }})
     return res.data;

@@ -18,7 +18,7 @@ export default function NormalHome({homebuttons}:{homebuttons:buttonProp[]}) {
                 }
                 else if(!accessToken && refreshToken){
                     try {
-                        const res=await axios.post('https://fittrakk.onrender.com/auth/refresh', {refreshToken:refreshToken},{ headers: { Authorization: `Bearer ${refreshToken}` } })
+                        const res=await axios.post('http://localhost:5001/auth/refresh', {refreshToken:refreshToken},{ headers: { Authorization: `Bearer ${refreshToken}` } })
                         document.cookie = `accessToken=${res.data.accessToken}; path=/; SameSite=Lax; max-age=3600;`
                         navigate('/home')
                     } catch (error) {

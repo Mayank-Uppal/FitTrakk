@@ -19,10 +19,10 @@ export default function MainHome() {
         queryKey:['dashboard'],
         queryFn:async()=>{
             const accessToken=getCookie('accessToken');
-            const response=await axios.get('https://fittrakk.onrender.com/log/goalData',{headers:{
+            const response=await axios.get('http://localhost:5001/log/goalData',{headers:{
                 Authorization:`Bearer ${accessToken}`
             }});
-            const actualResponse=await axios.get('https://fittrakk.onrender.com/track/dashboard',{headers:{
+            const actualResponse=await axios.get('http://localhost:5001/track/dashboard',{headers:{
                 Authorization:`Bearer ${accessToken}`
             }});
             setactual(actualResponse.data.data);
@@ -39,21 +39,21 @@ export default function MainHome() {
   return (
     <>
     {isPending?<Dashboard/>:(
-        <div className="flex flex-col bg-slate-950  min-h-screen ">
+        <div className="flex flex-col bg-slate-950  min-h-screen w-full">
 
-            <div className=" mx-15 mt-7 text-center">
-                <p className="text-2xl text-white/85 font-body "> Hey, here's your progress 💪</p>
+            <div className=" lg:mx-15 mt-7 text-center">
+                <p className="lg:text-2xl text-sm text-white/85 font-body "> Hey, here's your progress 💪</p>
             </div>
-            <div className="grid grid-cols-3 gap-10 mt-7 mx-15 place-items-center">
+            <div className="lg:grid lg:grid-cols-3 flex flex-col gap-10 mt-7 mx-15 place-items-center">
                 {[...Array(6)].map((_,index)=>(
                         <HomeCard icons={icons[index]} title={titles[index]} goalNum={goalValues[index]} actualNum={actualValues[index]}/>
                 ))}
             </div>
             
-            <div className=" mx-15 mt-5 text-center">
-                <p className="text-2xl text-white/85 font-body "> Small steps daily, big results eventually.</p>
+            <div className=" lg:mx-15 mx-4 mt-5 text-center">
+                <p className="lg:text-2xl text-lg text-white/85 font-body "> Small steps daily, big results eventually.</p>
             </div>   
-            <div className="mt-7 max-w-sm text-center mx-auto ">  
+            <div className="my-7 max-w-sm text-center mx-auto ">  
                 <Button buttons={button}/>
             </div>     
     </div>
