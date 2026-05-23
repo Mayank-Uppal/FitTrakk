@@ -81,7 +81,7 @@ export default function Auth() {
         {redirect?<Redirecting/>:(
             <div className="flex flex-col bg-slate-950 overflow-hidden h-screen">
             <Navbar />
-            <div className="h-screen flex flex-col items-center justify-center text-center gap-3 ">
+            <div className="h-screen flex flex-col items-center justify-center text-center gap-3 px-4 md:px-4 ">
                 {auth ? (
                     <>
                     <Header
@@ -90,7 +90,7 @@ export default function Auth() {
                     headingWidth="max-w-6xl text-white"
                     subHeadingWidth="max-w-4xl"
                     />
-                    <div className="w-full max-w-xl">
+                    <div className="md:w-full md:max-w-xl">
                         <Input key="email" input={input} 
                         register={emailForm.register} 
                         errors={emailForm.formState.errors}  
@@ -109,7 +109,7 @@ export default function Auth() {
                     subHeadingWidth="max-w-2xl"
                     headingWidth="max-w-6xl text-white"
                     />
-                    <div className="w-full max-w-xl text-center">
+                    <div className="w-full max-w-xl text-center ">
                         <Input key="otp" input={otpInput} 
                         register={otpForm.register} 
                         errors={otpForm.formState.errors}
