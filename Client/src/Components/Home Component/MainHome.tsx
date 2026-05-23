@@ -14,8 +14,6 @@ export default function MainHome() {
     const navigate=useNavigate();
     const [goal,setgoal]=useState<any>([]);
     const [actual,setactual]=useState<any>({});
-    console.log(actual)
-
 
     const {isPending}=useQuery({
         queryKey:['dashboard'],

@@ -8,8 +8,8 @@ interface HeadingProp{
 export default function Header({Heading,subHeading,headingWidth,subHeadingWidth}:HeadingProp) {
   return (
     <>
-    <h1 className={`text-6xl font-body font-extrabold ${headingWidth} `}>{Heading}</h1>
-    <p className={`text-2xl text-white/45 font-body ${subHeadingWidth}`}>{subHeading}</p>
+    <h1 className={`md:text-6xl text-xl font-body font-extrabold ${headingWidth} `}>{Heading}</h1>
+    <p className={`md:text-2xl text-sm text-white/45 font-body ${subHeadingWidth}`}>{subHeading}</p>
     </>
   )
 }
