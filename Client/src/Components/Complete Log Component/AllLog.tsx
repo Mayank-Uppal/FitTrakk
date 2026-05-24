@@ -38,12 +38,12 @@ export default function AllLog() {
   return (
     <>
     {isPending?<Summary/>:(
-         <div className='min-h-screen bg-slate-950'>
+        <div className='min-h-screen bg-slate-950'>
         <div className='flex flex-row justify-between items-center'>
-            <p className='text-white/60 font-body text-2xl mx-10 py-10 '>Log Summary - {date}</p>
+            <p className='text-white/60 font-body lg:text-2xl text-lg mx-10 py-10 '>Log Summary - {date}</p>
         </div>
 
-            <div className='grid grid-cols-3 gap-4 mx-10'>
+            <div className='grid lg:grid-cols-3 grid-cols-1 gap-4 mx-10'>
                 {props.map((p,index)=>(
                     <NewCard key={index} {...p}/>
                 ))}
@@ -54,7 +54,7 @@ export default function AllLog() {
                 <Table MealData={mealData}/>
             </div>
             
-            <div className='mt-30 max-w-xl mx-auto'>
+            <div className='lg:mt-30 mt-10 lg:max-w-xl lg:mx-auto mx-12 py-4'>
                 <Button buttons={[{id:1,text:"Back to all logs",reverse:false,handleClick:()=>navigate(-1)}]}/>
             </div>
 

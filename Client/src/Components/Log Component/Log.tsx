@@ -6,6 +6,7 @@ import { getCookie } from "../Protected Component/Protected";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Logs from "../Loading Component/Logs";
+import SideBarResponsive from "../Responsive SideBar Component/sideBarResponsive";
 
 export default function Log() {
     const [logsData,allLogsData]=useState<any>([]);
@@ -29,12 +30,17 @@ export default function Log() {
   return (
     <>
     {isPending ? <Logs/>:(
-      <div className="flex flex-row w-full">
-          <div className=" fixed w-1/5">
+      <div className="lg:flex lg:flex-row lg:w-full ">
+          <div className="hidden lg:block lg:fixed lg:w-1/5">
             <Sidebar/>
           </div>
+          <div className="block lg:hidden lg:fixed lg:w-1/5 ml-4 ">
+            <SideBarResponsive/>
+          </div>
           
-          <div className="w-full ml-85 min-h-screen bg-slate-950 px-10 py-10">
+        
+
+          <div className="lg:w-4/5 lg:ml-auto min-h-screen bg-slate-950 lg:px-10 px-7 py-10">
             <Card allLog={logsData}  handleClick={handleClick}/>
           </div>      
     </div>

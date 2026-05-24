@@ -74,9 +74,9 @@ export default function UserInfo() {
   return (
     <>
     {goalPending?<RedirectingAI/>:(
-        <div className="flex flex-col bg-slate-950 overflow-hidden h-screen">
+        <div className="flex flex-col bg-slate-950 overflow-hidden min-h-screen">
         <Navbar />
-        <div className="h-screen flex flex-col mt-20 items-center text-center gap-3 ">
+        <div className="h-screen flex flex-col lg:mt-20 items-center text-center gap-3 px-4 lg:px-0 ">
 
             <div className="my-10">
                 <p className="text-white/40 text-md">Step - {step+1} of 4</p>
@@ -89,7 +89,7 @@ export default function UserInfo() {
                 subHeadingWidth={steps[step].subHeadingWidth}
             />
             
-            <div className="flex flex-col gap-4 w-full max-w-xl mt-12">
+            <div className="flex flex-col gap-4 lg:w-full lg:max-w-xl w-3/4 lg:mt-12 mt-5">
             <Input  
             input={
                 step===0 && active ? [allInputs[0][0]] :

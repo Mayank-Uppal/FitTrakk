@@ -49,9 +49,9 @@ export default function Input({input,register,errors,handleSubmit,onsubmit,butto
       <div className={`flex ${input[0]?.name?.includes('otp') ? 'flex-row' : 'flex-col'} gap-4`}>
       {input.map((i,index)=>(
         <>
-        <div className={`flex flex-col ${i.name=='goal' ? 'border border-white/40 p-4' : ''}`}>
+        <div className={`flex flex-row ${i.name=='goal' ? 'border border-white/40 p-4' : ''}`}>
           <input key={i.name} value={i.span} {...(register ? register(i.name as string) : {})} checked={selected===i.span} id={`otp-${index}`} onKeyDown={i.name==='otp'?((e:React.KeyboardEvent<HTMLInputElement>)=>handleKey(e,index)):undefined} onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleChange(e,index)} name={i.name} className={`text-center md:py-4 py-3 font-body text-white text-sm md:text-xl rounded-md border border-gray-400/50 ${i.span?'':'w-full'}`} type={i.type} placeholder={i.placeholder}  />
-          {i.span && <span className='text-xl font-body w-full text-white'>{i.span}</span>}
+          {i.span && <span className='lg:text-xl text-sm font-body w-full text-white'>{i.span}</span>}
           {i.name && errors?.[i.name] && (
             <span className="text-red-400 text-center text-sm mt-1">
               {errors?.[i.name]?.message as string}
