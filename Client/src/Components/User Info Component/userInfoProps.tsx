@@ -37,10 +37,10 @@ export const allInputs = [
         { id: 1, type: "number", placeholder: "Your Age",name:"age" }
     ],
     [
-        { id: 1, type: "radio", span: "I want to lose fat and look leaner", name: "goal" },
-        { id: 2, type: "radio", span: "I want to build a stronger, muscular body", name: "goal" },
-        { id: 3, type: "radio", span: "I want more energy and better stamina", name: "goal" },
-        { id: 4, type: "radio", span: "I just want to stay consistent and healthy", name: "goal" },
+        { id: 1, type: "radio", span: "Lose fat and get leaner", name: "goal" },
+        { id: 2, type: "radio", span: "Build muscle and gain strength", name: "goal" },
+        { id: 3, type: "radio", span: "Maintain current weight", name: "goal" },
+        { id: 4, type: "radio", span: "Improve stamina and fitness", name: "goal" },
     ]
 ]
 
